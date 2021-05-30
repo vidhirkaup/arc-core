@@ -1,5 +1,7 @@
-package com.vlabs.arc.core.service;
+package com.vlabs.arc.core.engine;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.stereotype.Component;
@@ -19,8 +21,10 @@ public class MessageSender {
         this.queue = queue;
     }
 
-    public void send(String message) {
-        log.info(">>> sending - {}", message);
-        jmsTemplate.convertAndSend(queue, message);
+    @SneakyThrows
+    public void send(Message message) {
+        String msg = new ObjectMapper().writeValueAsString(message);
+        log.info(">>> sending - {}", msg);
+        jmsTemplate.convertAndSend(queue, msg);
     }
 }
