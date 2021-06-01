@@ -22,13 +22,17 @@ public class MessageController {
     @GetMapping("/send/{count}")
     public <T> String send(@PathVariable("count") Integer count) {
 
-        Message message;
+        Message message = new Message();
 
         for (int i = 0; i < count; i++) {
             if (i % 2 == 0) {
-                message = new DealAction("1234", "Draft");
+                DealAction dealAction = new DealAction("1234", "Draft");
+                message.setMessageType("deal");
+                message.setPayload(dealAction);
             } else {
-                message = new TrancheAction(101, "Vidhir");
+                TrancheAction trancheAction = new TrancheAction(101, "Vidhir");
+                message.setMessageType("tranche");
+                message.setPayload(trancheAction);
             }
             messageSender.send(message);
         }
