@@ -25,13 +25,10 @@ public class MessageController {
         Message message;
 
         for (int i = 0; i < count; i++) {
-
             if (i % 2 == 0) {
                 message = new DealAction("1234", "Draft");
-//                message.setMessageType("deal");
             } else {
                 message = new TrancheAction(101, "Vidhir");
-//                message.setMessageType("tranche");
             }
             messageSender.send(message);
         }
