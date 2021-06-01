@@ -17,14 +17,17 @@ public class MessageSender {
 
     private Queue queue;
 
+    private ObjectMapper objectMapper;
+
     public MessageSender(JmsTemplate jmsTemplate, Queue queue) {
         this.jmsTemplate = jmsTemplate;
         this.queue = queue;
+        objectMapper = new ObjectMapper();
     }
 
     @SneakyThrows
     public void send(Message message) {
-        String msg = new Gson().toJson(message);
+        String msg = objectMapper.writeValueAsString(message);
 
         log.info(">>> sending - {}", msg);
         jmsTemplate.convertAndSend(queue, msg);
