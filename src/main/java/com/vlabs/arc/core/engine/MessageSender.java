@@ -1,6 +1,7 @@
 package com.vlabs.arc.core.engine;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.jms.core.JmsTemplate;
@@ -23,7 +24,8 @@ public class MessageSender {
 
     @SneakyThrows
     public void send(Message message) {
-        String msg = new ObjectMapper().writeValueAsString(message);
+        String msg = new Gson().toJson(message);
+
         log.info(">>> sending - {}", msg);
         jmsTemplate.convertAndSend(queue, msg);
     }

@@ -27,12 +27,9 @@ public class MessageController {
         Map<String, Object> headers;
         for (int i = 0; i < count; i++) {
 
-            DealAction payload = new DealAction("1234", "Draft");
+            DealAction dealAction = new DealAction("1234", "Draft");
 
-            headers = new HashMap<>();
-            headers.put("id", i);
-            headers.put("type", payload.getClass());
-            Message message = new Message<DealAction>(payload, headers);
+            Message message = new Message(dealAction, dealAction.getClass().getSimpleName());
 
             messageSender.send(message);
         }

@@ -1,10 +1,10 @@
 package com.vlabs.arc.core.engine;
 
+import com.vlabs.arc.core.domain.deal.DealAction;
 import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.Serializable;
-import java.util.Map;
 
 @Slf4j
 @NoArgsConstructor
@@ -13,12 +13,12 @@ import java.util.Map;
 @Setter
 @EqualsAndHashCode
 @ToString
-public class Message<T> implements Serializable {
+public class Message implements Serializable {
 
     private static final long serialVersionUID = 5337988065299872856L;
 
-    private T payload;
+    private DealAction dealAction;
 
-    private Map<String, Object> headers;
+    private String type;
 
 }
