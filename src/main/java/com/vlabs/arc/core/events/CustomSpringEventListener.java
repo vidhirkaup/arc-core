@@ -10,6 +10,6 @@ public class CustomSpringEventListener implements ApplicationListener<CustomSpri
 
     @Override
     public void onApplicationEvent(CustomSpringEvent event) {
-        log.info(" >>> received spring custom event {}", event.getMessage());
+        log.info(" CustomSpringEventListener >>> received spring custom event {}", event.getMessage());
     }
 }
